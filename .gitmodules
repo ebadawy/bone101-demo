@@ -1,0 +1,6 @@
+[submodule "ace-builds"]
+	path = ace-builds
+	url = git@github.com:ajaxorg/ace-builds.git
+[submodule "slick"]
+	path = slick
+	url = git@github.com:kenwheeler/slick.git
