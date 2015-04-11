@@ -93,7 +93,7 @@ div.bonecard-code:after {
 #editor {
     width: 447px;
 	height: 326px;
-	border-radius: 25px;
+	border-radius: 0px;
 	border-top-right-radius: 0px;
 	border-bottom-right-radius: 0px;
 	position: absolute;
