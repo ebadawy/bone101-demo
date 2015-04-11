@@ -99,8 +99,26 @@ div.bonecard-code:after {
 	position: absolute;
 	float: center;
 }
-/* Sorry for the "important", but will find */
-/* another when start the actual coding */
+/* Sorry for the "important", but I'll find */
+/* another way when starting the actual coding */
 .ace_gutter {
 	background: #272822 !important;
+}
+
+iframe {
+	margin-left: 19%;
+	margin-top: 4%;
+	width: 457px;
+	height: 322px;
+	padding: 10px;
+	-webkit-border-radius: 20px;
+	-webkit-border-top-right-radius: 50px;
+	-webkit-border-bottom-right-radius: 50px;
+	-moz-border-radius: 20px;
+	-moz-border-radius-topright: 50px;
+	-moz-border-radius-bottomright: 50px;
+	position: absolute;
+	float: center;
+	-webkit-transition: color 0.5s ease;
+	box-sizing: content-box;
 }
