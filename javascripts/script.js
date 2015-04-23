@@ -7,17 +7,15 @@ window.onload = function() {
 		cssEase: 'linear',
 		arrows: false
 	});
- OAuth.initialize('qo-7OvDrW7SRNV0p6F1yoXfq33Q');
+ OAuth.initialize('5mlO7j_7djd5808nB18KWjkE_ok');
 
 	$('.login').click(function() {
 		OAuth.popup('github')
 	    .done(function(result) {
-	     	console.log(result);
 	     	console.log(result.access_token);
 	    })
 	    .fail(function (err) {
 	    	console.log(err);
-		});	
+		});
 	});	
-
 }
