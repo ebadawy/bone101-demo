@@ -43,6 +43,7 @@ window.onload = function() {
 
 	$('.upload').click(function() {
 		if(img_name) {
+			$('.status').html('Uploading...');
 			file_name = 'encoded_' + img_name + '.txt';
 			var gist_params = {
 				description: 'upload '+ img_name + ' through bone101-demo',
@@ -63,7 +64,7 @@ window.onload = function() {
 			}
 
 			create_gist_request.success = function(data) {
-				$('.status').html('The img is now uploaded.');
+				$('.status').html('Done!');
 				console.log('Uploaded!');
 			};
 			create_gist_request.error = function(err) {
@@ -90,22 +91,26 @@ window.onload = function() {
 					if(Object.keys(val.files)[0].indexOf('encoded_') > -1)
 						gists.push(val);
 				});
-				.log(gists);
-				$.each(gists, function(index, gist) {
-					$.ajax({
-						type: 'GET',
-						url: 'https://api.github.com/gists/' + gist.id,
-						success: function(response) {
-		    				$('.status').html('Done!');
-							current_file_name = Object.keys(gist.files)[0];
-							$('.gists').append('<img src="' + response.files[current_file_name].content+'">');
-						},
-						error: function(error) {
-							console.log(error);
-    						$('.status').html('something went wrog! please check the console log.');
-						}
+				if(gists.length != 0) {
+					$.each(gists, function(index, gist) {
+						$.ajax({
+							type: 'GET',
+							url: 'https://api.github.com/gists/' + gist.id,
+							success: function(response) {
+								current_file_name = Object.keys(gist.files)[0];
+								$('.gists').append('<img src="' + response.files[current_file_name].content+'">');
+							},
+							error: function(error) {
+								console.log(error);
+	    						$('.status').html('something went wrog! please check the console log.');
+							}
+						});
 					});
-				})
+			    $('.status').html('Done!');
+
+				} else
+					$('.status').html('No image found, Please upload something first.');
+
 			},
 			error: function(err) {
 				console.log(err);
