@@ -33,7 +33,7 @@ window.onload = function() {
 		        email = me.email;
 		        $.ajax({
 		        	type: 'GET',
-		        	url: request_url,
+		        	url: request_url + '?ref=gh-pages',
 		        	success: function(data) {
 		        		console.log('uploading...');
 		        		$('.status').html('uploading...');
@@ -59,11 +59,32 @@ window.onload = function() {
 						upload_file_request.success = function(data) {
 		        			$('.status').html('The img is now uploaded.');
 							console.log('Uploaded!');
+						};
+						upload_file_request.error = function(err) {
+		        			$('.status').html('something went wrog! please check the console log.');
+							console.log(err);
 						}
 						$.ajax(upload_file_request);
 		        	}
 		        });
 		    })
 		});
+	});
+
+	$('.refresh').click(function() {
+		    $('.status').html('Loading...');
+			$.ajax({
+			type: 'GET',
+			url: request_url + '?ref=gh-pages',
+			success: function(data) {
+				$('.img-tag').attr('src', atob(data.content));	
+		    	$('.status').html('Done!');
+			},
+			error: function(err) {
+				console.log(err);
+    			$('.status').html('something went wrog! please check the console log.');
+			}
+		});
+		
 	});
 }
