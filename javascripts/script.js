@@ -18,7 +18,6 @@ window.onload = function() {
 			var fileReader = new FileReader();
 			fileReader.onload = function(fileLoadedEvent) {
 				image = fileLoadedEvent.target.result;
-				console.log(image);
 			};
 			fileReader.readAsDataURL(fileToLoad);
 		}
@@ -36,7 +35,32 @@ window.onload = function() {
 		        	type: 'GET',
 		        	url: request_url,
 		        	success: function(data) {
-		        		console.log("SHA: " + data.sha);
+		        		console.log('uploading...');
+		        		$('.status').html('uploading...');
+		        		params = {
+							message: "Update the image through github API",
+							committer: {
+								name: me.name,
+								email: me.email
+							},
+							content: btoa(image),
+							branch: 'gh-pages',
+							sha: data.sha
+						};
+
+						upload_file_request = {
+							url: request_url,
+							type: "PUT",
+							data: JSON.stringify(params)
+						}
+						upload_file_request.headers = {
+							"Authorization": 'token ' + access_token
+						}
+						upload_file_request.success = function(data) {
+		        			$('.status').html('The img is now uploaded.');
+							console.log('Uploaded!');
+						}
+						$.ajax(upload_file_request);
 		        	}
 		        });
 		    })
